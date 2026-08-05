@@ -8,6 +8,12 @@ const jwt = require("jsonwebtoken");
 
 // Registro de un nuevo usuario
 exports.signup = (req, res) => {
+  if (!req.body.username || !req.body.email || !req.body.password) {
+    return res.status(400).send({
+      message: "username, email y password son obligatorios."
+    });
+  }
+
   // Ciframos la contraseña ANTES de guardarla; nunca se guarda en texto plano
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
@@ -20,7 +26,17 @@ exports.signup = (req, res) => {
       res.send({ message: "Usuario registrado exitosamente!", id: usuario.id });
     })
     .catch(err => {
-      res.status(500).send({ message: err.message || "Ocurrió un error al registrar el usuario." });
+      console.error("Signup error:", err);
+
+      if (err.name === "SequelizeUniqueConstraintError" || err.parent?.code === "23505") {
+        return res.status(409).send({
+          message: "Username o email ya existen. Usa datos diferentes."
+        });
+      }
+
+      res.status(500).send({
+        message: err.message || "Ocurrió un error al registrar el usuario."
+      });
     });
 };
 
