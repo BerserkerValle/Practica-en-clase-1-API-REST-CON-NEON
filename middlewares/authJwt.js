@@ -1,6 +1,6 @@
 // app/middlewares/authJwt.js
 const jwt = require("jsonwebtoken");
-const authConfig = require("../config/auth.config.js");
+const authConfig = require("../app/config/db.config.js/auth.config.js");
 
 verifyToken = (req, res, next) => {
   // El token viaja en el header "x-access-token" o en "Authorization: Bearer <token>"

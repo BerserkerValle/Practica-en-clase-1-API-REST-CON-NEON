@@ -1,6 +1,6 @@
 module.exports = app => {
   const clientes = require("../controllers/cliente.controller.js");
-  const { verifyToken } = require("../middlewares/authJwt.js"); // <-- Verifica que esta ruta/nombre exista EXACTO en GitHub
+  const { verifyToken } = require("../../middlewares/authJwt.js");
   var router = require("express").Router();
 
   // Protegemos creación, actualización y borrado con verifyToken

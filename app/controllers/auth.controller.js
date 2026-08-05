@@ -1,6 +1,6 @@
 // app/controllers/auth.controller.js
 const db = require("../models");
-const config = require("../config/auth.config.js");
+const config = require("../config/db.config.js/auth.config.js");
 const Usuario = db.usuarios;
 
 const bcrypt = require("bcryptjs");
