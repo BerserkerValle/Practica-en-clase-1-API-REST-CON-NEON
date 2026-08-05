@@ -26,6 +26,8 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // Registramos el modelo de cliente en el objeto db
+// aqui tambien se registra el usario por medio del modelo 
+db.usuarios = require("./usuario.model.js")(sequelize, Sequelize);
 db.clientes = require("./cliente.model.js")(sequelize, Sequelize);
 
 // Aquí puedes seguir registrando otros modelos de forma similar

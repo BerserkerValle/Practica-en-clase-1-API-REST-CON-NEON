@@ -29,6 +29,8 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/cliente.route")(app);
+require("./app/routes/auth.route")(app);
+// aqui se agrego la ruta de  authJwt para proteger las rutas que lo requieran
 // Si agregas más recursos (ej. tutorial), regístralos igual:
 // require("./app/routes/tutorial.route")(app);
 
