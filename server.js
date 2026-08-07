@@ -39,3 +39,11 @@ const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+// En server.js, ANTES de app.use(bodyParser.json())
+app.post("/api/pago/webhook", express.raw({ type: "application/json" }),
+  require("./app/controllers/pago.controller.js").webhook
+);
+
+// Después, el resto de rutas normales:
+app.use(bodyParser.json());
+require("./app/routes/pago.route")(app); // el resto de rutas de pago (crear-sesion) sí usa JSON normal
